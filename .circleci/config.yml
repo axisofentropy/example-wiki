@@ -45,7 +45,7 @@ workflows:
       - azure-acr/build-and-push-image:
           name: Build Image from Tag and Push to Azure Container Registry
           filters:
-            tags: 
+            tags:
               only: /.*/
             branches:
               ignore: /.*/
@@ -61,6 +61,26 @@ workflows:
   build-push-docker-hub:
     jobs:
       - docker/publish:
+          name: Build Image from Pull Request and Push to Docker Hub
+          filters:
+            branches:
+              ignore: dev
+          pre-steps:
+            - run:
+                name: Setup Environment Variables For Pull Request
+                command: echo 'export TAG=uffizzi_request_`echo $CIRCLE_PULL_REQUEST | grep [^\/]*$ --only-matching`' >> $BASH_ENV
+            - run:
+                name: (Echo $TAG for Troubleshooting)
+                command: echo $TAG
+          dockerfile: dev/build/Dockerfile
+          lint-dockerfile: true
+          image: $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME
+          tag: $TAG
+          update-description: false
+          context:
+            - test-adams-docker-hub
+
+      - docker/publish:
           name: Build Image from `dev` Branch and Push to Docker Hub as `latest`
           filters:
             branches:
@@ -70,5 +90,20 @@ workflows:
           image: $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME
           tag: latest
           update-description: true
+          context:
+            - test-adams-docker-hub
+
+      - docker/publish:
+          name: Build Image from Tag and Push to Docker Hub
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              ignore: /.*/
+          dockerfile: dev/build/Dockerfile
+          lint-dockerfile: true
+          image: $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME
+          tag: $CIRCLE_TAG
+          update-description: false
           context:
             - test-adams-docker-hub
