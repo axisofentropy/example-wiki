@@ -19,7 +19,6 @@ workflows:
             - run:
                 name: (Echo $TAG for Troubleshooting)
                 command: echo $TAG
-          dockerfile: # defaults to `Dockerfile`
           path: # Defaults to working directory
           login-server-name: uffizziqa.azurecr.io # e.g. {yourregistryname}.azure.io
           registry-name: uffizziqa
@@ -34,7 +33,6 @@ workflows:
           filters:
             branches:
               only: dev
-          dockerfile: # defaults to `Dockerfile`
           path: # Defaults to working directory
           login-server-name: uffizziqa.azurecr.io # e.g. {yourregistryname}.azure.io
           registry-name: uffizziqa
@@ -51,7 +49,6 @@ workflows:
               only: /.*/
             branches:
               ignore: /.*/
-          dockerfile: # defaults to `Dockerfile`
           path: # Defaults to working directory
           login-server-name: uffizziqa.azurecr.io # e.g. {yourregistryname}.azure.io
           registry-name: uffizziqa
