@@ -14,7 +14,7 @@ services:
       - db-data:/var/lib/postgresql/data
 
   wiki:
-    image: axisofentropy/example-wiki:latest
+    image: uffizziqa.azurecr.io/example-wiki:latest
     depends_on:
       - db
     environment:
