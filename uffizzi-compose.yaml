@@ -7,14 +7,9 @@ services:
       POSTGRES_DB: wiki
       POSTGRES_PASSWORD: wikijsrocks
       POSTGRES_USER: wikijs
-    logging:
-      driver: "none"
-    restart: unless-stopped
 
   wiki:
     image: uffizziqa.azurecr.io/example-wiki:latest
-    depends_on:
-      - db
     environment:
       DB_TYPE: postgres
       DB_HOST: localhost
@@ -22,9 +17,6 @@ services:
       DB_USER: wikijs
       DB_PASS: wikijsrocks
       DB_NAME: wiki
-    restart: unless-stopped
-    ports:
-      - "80:3000"
 
 ingress:
   service: wiki
