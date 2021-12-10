@@ -12,7 +12,7 @@ services:
     restart: unless-stopped
 
   wiki:
-    image: requarks/wiki:2
+    image: uffizziqa.azurecr.io/example-wiki:latest
     depends_on:
       - db
     environment:
@@ -29,3 +29,7 @@ services:
 ingress:
   service: wiki
   port: 3000
+
+continuous_preview:
+  deploy_preview_when_image_tag_is_created: true
+  share_to_github: true
