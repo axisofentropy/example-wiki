@@ -81,9 +81,9 @@ jobs:
     with:
       compose-file-cache-key: ${{ needs.render-compose-file.outputs.compose-file-cache-key }}
       compose-file-cache-path: docker-compose.rendered.yml
-      username: vibhav.bobade+wikijs@uffizzi.com
+      username: adam+1@idyl.tech
       server: https://app.uffizzi.com
-      project: wikijs-gyyp
+      project: wikijs-test-cmok
     secrets:
       password: ${{ secrets.UFFIZZI_PASSWORD }}
     permissions:
