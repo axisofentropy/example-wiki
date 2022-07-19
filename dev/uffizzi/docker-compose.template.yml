@@ -16,8 +16,8 @@ services:
       POSTGRES_PASSWORD: wikijsrocks
       POSTGRES_USER: wikijs
     restart: unless-stopped
-    volumes:
-      - db-data:/var/lib/postgresql/data
+    # volumes:
+    #   - db-data:/var/lib/postgresql/data
 
   wiki:
     image: "${WIKI_IMAGE}"
@@ -38,6 +38,6 @@ services:
         limits:
           memory: 500M
 
-volumes:
-  db-data:
+# volumes:
+#   db-data:
 
